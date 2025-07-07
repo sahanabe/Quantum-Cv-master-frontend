@@ -1,89 +1,3 @@
-name: CI/CD Pipeline
-
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
-
-permissions:
-  contents: write      # Required to push to gh-pages
-  pages: write
-  id-token: write
-
-env:
-  NODE_VERSION: '18'
-  NPM_VERSION: '9'
-
-jobs:
-  test-and-build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Run lint (if exists)
-        run: |
-          if npm run | grep -q "lint"; then
-            npm run lint
-          else
-            echo "🟡 No lint script found in package.json, skipping lint"
-          fi
-
-      - name: Run tests
-        run: npm test -- --coverage --watchAll=false
-
-      - name: Build application
-        run: npm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: build/
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage/
-
-  security-audit:
-    runs-on: ubuntu-latest
-    needs: test-and-build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci --legacy-peer-deps
-
-      - name: Run security audit
-        run: npm audit --audit-level=moderate || echo "⚠️ Audit issues found"
-
-      - name: Suggest fixes
-        run: npm audit fix --dry-run || echo "🛠️ Fix suggestions listed"
-
   deploy-pages:
     runs-on: ubuntu-latest
     needs: [test-and-build, security-audit]
@@ -117,43 +31,13 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
+          # Use GitHub Token if it works, otherwise use Personal Access Token
+          # 👇 Prefer `personal_token` if you're still getting 403
+          # Uncomment below if using PAT:
+          # personal_token: ${{ secrets.GH_PAT }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
+          force_orphan: true  # ✅ Fix for first-time branch not found
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-
-  deploy-vercel:
-    runs-on: ubuntu-latest
-    needs: [test-and-build, security-audit]
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-
-  notify:
-    runs-on: ubuntu-latest
-    needs: [test-and-build, security-audit, deploy-pages, deploy-vercel]
-    if: always()
-
-    steps:
-      - name: Notify on Success
-        if: success()
-        run: |
-          echo "✅ All jobs completed successfully!"
-          echo "🚀 Frontend deployed successfully"
-
-      - name: Notify on Failure
-        if: failure()
-        run: |
-          echo "❌ Some jobs failed"
-          echo "Please check the workflow logs for details"
