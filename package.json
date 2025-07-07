@@ -11,7 +11,7 @@
     "axios": "^1.6.7",
     "file-saver": "^2.0.5",
     "html-docx-js": "^0.3.1",
-    "i18next": "^25.3.0",
+    "i18next": "^23.7.16",
     "jspdf": "^3.0.1",
     "lucide-react": "^0.514.0",
     "pdfjs-dist": "^3.11.174",
@@ -20,11 +20,12 @@
     "react": "^18.2.0",
     "react-calendar": "^6.0.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^15.5.3",
+    "react-i18next": "^14.0.5",
     "react-quill": "^2.0.0",
     "react-router-dom": "^7.6.1",
     "react-scripts": "5.0.1",
-    "recharts": "^2.15.3"
+    "recharts": "^2.15.3",
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "set PORT=3001 && react-scripts start",
