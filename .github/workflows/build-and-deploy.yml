@@ -40,4 +40,4 @@ jobs:
         with:
           action: "upload"
           app_location: "."             # Location of your app
-          output_location: "build"      # Output folder after build
+          output_location: "build"      
