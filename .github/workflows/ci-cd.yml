@@ -43,7 +43,7 @@ jobs:
             echo "🟡 No lint script found in package.json, skipping lint"
           fi
 
-      - name: Run tests
+      - name: Run tests (pass if no tests)
         run: npm test -- --coverage --watchAll=false --passWithNoTests
 
       - name: Build application
