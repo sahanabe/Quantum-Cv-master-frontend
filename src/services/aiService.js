@@ -1,6 +1,7 @@
 import { message } from 'antd';
+import { api } from '../config/api';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://quantumcv-backend-efbjdecdhpawckfp.japanwest-01.azurewebsites.net';
 
 /**
  * Generic API request function
