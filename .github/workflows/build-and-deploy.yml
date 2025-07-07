@@ -39,9 +39,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const core = require('@actions/core');
-            const idToken = await core.getIDToken();
-            return idToken;
+            return await core.getIDToken();
           result-encoding: string
 
       - name: Build And Deploy
@@ -52,9 +50,9 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ORANGE_MOSS_001332F00 }}
           action: "upload"
-          app_location: "." # App source code path
-          api_location: ""  # No API
-          output_location: "build"
+          app_location: "."           # Root of app
+          api_location: ""            # No backend API
+          output_location: "build"    # Built output
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
