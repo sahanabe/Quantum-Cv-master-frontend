@@ -117,7 +117,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: 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
+          personal_token: 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   # <-- Use your PAT secret here!
           publish_dir: ./build
           publish_branch: gh-pages
           user_name: github-actions[bot]
