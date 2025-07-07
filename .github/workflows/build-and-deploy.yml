@@ -41,9 +41,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const core = require('@actions/core');
-            const token = await core.getIDToken();
-            return token;
+            return await core.getIDToken();  # ✅ No `require`, use built-in `core`
           result-encoding: string
 
       - name: Build And Deploy
@@ -69,4 +67,3 @@ jobs:
         with:
           action: "close"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-
