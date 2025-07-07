@@ -114,10 +114,14 @@ jobs:
             echo "✅ Build directory found"
           fi
 
+      # Suppress 'No such remote: origin' error (cosmetic, not required)
+      - name: Suppress missing remote error
+        run: git remote rm origin 2>/dev/null || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: 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   # <-- Use your PAT secret here!
+          personal_token: ${{ secrets.GH_PAT }}   # <-- Use your PAT secret here!
           publish_dir: ./build
           publish_branch: gh-pages
           user_name: github-actions[bot]
