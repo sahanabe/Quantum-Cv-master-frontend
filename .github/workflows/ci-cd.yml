@@ -7,7 +7,7 @@ on:
     branches: [ main, develop ]
 
 permissions:
-  contents: write      # 🔐 Give actions like gh-pages push access
+  contents: write      # Required to push to gh-pages
   pages: write
   id-token: write
 
@@ -105,14 +105,23 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Check build output exists
+        run: |
+          if [ ! -d "build" ]; then
+            echo "❌ Build directory does not exist. Failing..."
+            exit 1
+          else
+            echo "✅ Build directory found"
+          fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
-          user_name: sahanabe
-          user_email: sahanabe@users.noreply.github.com
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
 
   deploy-vercel:
     runs-on: ubuntu-latest
