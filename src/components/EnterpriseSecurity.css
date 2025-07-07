@@ -1,0 +1,509 @@
+/* Enterprise Security Page Styles */
+.enterprise-security-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.enterprise-security-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.enterprise-security-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero Section */
+.security-hero {
+  text-align: center;
+  padding: 60px 0;
+  margin-bottom: 40px;
+}
+
+.security-hero-title {
+  color: white !important;
+  font-size: 3.5rem !important;
+  font-weight: 700;
+  margin-bottom: 20px !important;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.security-hero-title .anticon {
+  margin-right: 15px;
+  font-size: 3rem;
+  color: #4ECDC4;
+}
+
+.security-hero-subtitle {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 1.2rem !important;
+  max-width: 600px;
+  margin: 0 auto 40px !important;
+  line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.security-hero-stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.stat-item {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+  display: block !important;
+  color: #4ECDC4 !important;
+  font-size: 2rem !important;
+  font-weight: 700;
+  margin-bottom: 5px !important;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 0.9rem !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Glass Card Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Security Overview */
+.security-overview {
+  margin-bottom: 40px;
+  padding: 30px !important;
+}
+
+.security-overview .ant-statistic-title {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 0.9rem !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.security-overview .ant-statistic-content {
+  color: white !important;
+}
+
+/* Features Section */
+.features-section {
+  margin-bottom: 40px;
+}
+
+.feature-card {
+  height: 100%;
+  padding: 25px !important;
+  text-align: center;
+}
+
+.feature-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.status-tag {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.feature-title {
+  color: white !important;
+  margin-bottom: 10px !important;
+  font-weight: 600;
+}
+
+.feature-description {
+  color: rgba(255, 255, 255, 0.8) !important;
+  line-height: 1.5;
+}
+
+/* Compliance Section */
+.compliance-section {
+  margin-bottom: 40px;
+  padding: 30px !important;
+}
+
+.compliance-section .ant-typography {
+  color: white !important;
+}
+
+.compliance-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.compliance-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.compliance-card.selected {
+  border-color: #4ECDC4;
+  background: rgba(78, 205, 196, 0.1) !important;
+}
+
+.compliance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.compliance-icon {
+  font-size: 2rem;
+}
+
+.compliance-title {
+  color: white !important;
+  margin-bottom: 10px !important;
+}
+
+.compliance-description {
+  color: rgba(255, 255, 255, 0.8) !important;
+  line-height: 1.5;
+}
+
+/* Monitoring Section */
+.monitoring-section {
+  margin-bottom: 40px;
+}
+
+.events-card, .policies-card {
+  height: 100%;
+  padding: 25px !important;
+}
+
+.events-card .ant-typography {
+  color: white !important;
+}
+
+.event-item {
+  margin-bottom: 15px;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.event-header .ant-typography {
+  color: white !important;
+}
+
+.event-details {
+  display: flex;
+  gap: 15px;
+}
+
+.event-details .ant-typography {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 0.85rem;
+}
+
+.policy-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.policy-header .ant-typography {
+  color: white !important;
+}
+
+.policy-item .ant-typography {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Controls Section */
+.controls-section {
+  margin-bottom: 40px;
+  padding: 30px !important;
+}
+
+.controls-section .ant-typography {
+  color: white !important;
+}
+
+.control-item {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.control-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.control-header .ant-typography {
+  color: white !important;
+  font-weight: 600;
+}
+
+.control-item .ant-typography {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* CTA Section */
+.cta-section {
+  text-align: center;
+  padding: 40px !important;
+}
+
+.cta-content .ant-typography {
+  color: white !important;
+}
+
+.cta-content .ant-btn {
+  height: 50px;
+  padding: 0 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.cta-content .ant-btn-primary {
+  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+  border: none;
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.cta-content .ant-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+.cta-content .ant-btn-default {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.cta-content .ant-btn-default:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+/* Timeline Customization */
+.ant-timeline-item-content {
+  color: white !important;
+}
+
+.ant-timeline-item-head {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Progress Bar Customization */
+.ant-progress-bg {
+  background: linear-gradient(90deg, #4ECDC4, #44A08D) !important;
+}
+
+.ant-progress-inner {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Switch Customization */
+.ant-switch-checked {
+  background: #4ECDC4 !important;
+}
+
+.ant-switch {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Badge Customization */
+.ant-badge-status-text {
+  color: white !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .security-hero-title {
+    font-size: 2.5rem !important;
+  }
+  
+  .security-hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .security-hero-stats {
+    gap: 20px;
+  }
+  
+  .stat-item {
+    padding: 15px;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem !important;
+  }
+  
+  .feature-card, .compliance-card {
+    padding: 20px !important;
+  }
+  
+  .controls-section, .compliance-section {
+    padding: 20px !important;
+  }
+  
+  .cta-section {
+    padding: 30px 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .enterprise-security-container {
+    padding: 0 15px;
+  }
+  
+  .security-hero {
+    padding: 40px 0;
+  }
+  
+  .security-hero-title {
+    font-size: 2rem !important;
+  }
+  
+  .security-hero-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .stat-item {
+    width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.feature-card:hover .feature-icon {
+  animation: pulse 0.6s ease-in-out;
+}
+
+.compliance-card:hover .compliance-icon {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Loading States */
+.ant-spin-dot-item {
+  background-color: #4ECDC4 !important;
+}
+
+/* Custom Scrollbar */
+.enterprise-security-bg::-webkit-scrollbar {
+  width: 8px;
+}
+
+.enterprise-security-bg::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.enterprise-security-bg::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.enterprise-security-bg::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+} 

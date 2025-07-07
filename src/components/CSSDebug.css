@@ -1,0 +1,30 @@
+.css-debug-container {
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 2px solid #333;
+  border-radius: 8px;
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.css-debug-title {
+  color: #e74c3c;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.css-debug-text {
+  color: #2c3e50;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.css-debug-box {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+} 

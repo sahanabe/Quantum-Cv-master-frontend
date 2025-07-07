@@ -1,0 +1,92 @@
+/* Neon wire animated background */
+.neon-bg {
+  position: fixed;
+  z-index: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.neon-wire {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+@keyframes neon-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px #00fff7) drop-shadow(0 0 24px #00fff7); }
+  50% { filter: drop-shadow(0 0 24px #00fff7) drop-shadow(0 0 48px #00fff7); }
+}
+.neon-wire path {
+  stroke: #00fff7;
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: neon-glow 2s infinite alternate;
+}
+body {
+  background: #101522;
+  color: #fff;
+}
+
+.ant-layout {
+  background: #101522 !important;
+}
+
+.ant-layout-header {
+  background: #181c2a !important;
+  border-bottom: 1px solid #23263a;
+}
+
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+  background: #181c2a !important;
+}
+
+.ant-card {
+  background: #181c2a !important;
+  color: #fff !important;
+  border-radius: 12px;
+  border: none;
+}
+
+.ant-typography, .ant-typography h1, .ant-typography h2, .ant-typography h3, .ant-typography h4, .ant-typography h5 {
+  color: #fff !important;
+}
+
+.ant-btn-primary {
+  background: #246bfd;
+  border: none;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+  background: #1a4bb8;
+}
+
+.ant-progress-bg {
+  background: #246bfd !important;
+}
+
+.ant-collapse {
+  background: #181c2a !important;
+  border: none;
+}
+
+.ant-collapse-item {
+  border-bottom: 1px solid #23263a !important;
+}
+
+.ant-collapse-header {
+  color: #fff !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #23263a;
+}
+::-webkit-scrollbar-thumb {
+  background: #181c2a;
+  border-radius: 4px;
+}
