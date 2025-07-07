@@ -7,9 +7,9 @@ on:
     branches: [ main, develop ]
 
 permissions:
-  contents: write      # Required for pushing to gh-pages branch
-  pages: write         # Required for GitHub Pages actions
-  id-token: write      # For OIDC authentication if needed
+  contents: write
+  pages: write
+  id-token: write
 
 env:
   NODE_VERSION: '18'
@@ -117,7 +117,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: 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           # Your PAT secret must be configured in repo settings
+          personal_token: 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
           publish_dir: ./build
           publish_branch: gh-pages
           user_name: github-actions[bot]
