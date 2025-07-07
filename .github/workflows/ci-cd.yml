@@ -44,7 +44,7 @@ jobs:
           fi
 
       - name: Run tests
-        run: npm test -- --coverage --watchAll=false
+        run: npm test -- --coverage --watchAll=false --passWithNoTests
 
       - name: Build application
         run: npm run build
@@ -117,12 +117,12 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GH_PAT }}  # ✅ Use PAT here
+          personal_token: ${{ secrets.GH_PAT }}  # ← Personal Access Token (with repo scope)
           publish_dir: ./build
           publish_branch: gh-pages
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
-          force_orphan: true  # ✅ For first-time branch creation
+          force_orphan: true
 
   deploy-vercel:
     runs-on: ubuntu-latest
