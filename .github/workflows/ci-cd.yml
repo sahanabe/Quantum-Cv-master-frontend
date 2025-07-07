@@ -6,12 +6,16 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+permissions:
+  contents: write      # 🔐 Give actions like gh-pages push access
+  pages: write
+  id-token: write
+
 env:
   NODE_VERSION: '18'
   NPM_VERSION: '9'
 
 jobs:
-  # Test and Build Job
   test-and-build:
     runs-on: ubuntu-latest
     strategy:
@@ -31,14 +35,12 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      # ✅ Optional: Run lint if you have a "lint" script in package.json
-      - name: Run linting
-        if: ${{ hashFiles('package.json') != '' && contains(join(fromJson('["' + github.event.head_commit.message + '"]'), ' '), 'lint') == false }}
+      - name: Run lint (if exists)
         run: |
           if npm run | grep -q "lint"; then
             npm run lint
           else
-            echo "🟡 No lint script found in package.json, skipping linting"
+            echo "🟡 No lint script found in package.json, skipping lint"
           fi
 
       - name: Run tests
@@ -53,13 +55,12 @@ jobs:
           name: build-files
           path: build/
 
-      - name: Upload coverage reports
+      - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage/
 
-  # Security Audit Job
   security-audit:
     runs-on: ubuntu-latest
     needs: test-and-build
@@ -78,12 +79,11 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Run security audit
-        run: npm audit --audit-level=moderate || echo "⚠️ Audit found issues"
+        run: npm audit --audit-level=moderate || echo "⚠️ Audit issues found"
 
-      - name: Run dependency check
-        run: npm audit fix --dry-run || echo "🛠️ Potential fixes available"
+      - name: Suggest fixes
+        run: npm audit fix --dry-run || echo "🛠️ Fix suggestions listed"
 
-  # Deploy to GitHub Pages (Optional)
   deploy-pages:
     runs-on: ubuntu-latest
     needs: [test-and-build, security-audit]
@@ -111,8 +111,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
+          user_name: sahanabe
+          user_email: sahanabe@users.noreply.github.com
 
-  # Deploy to Vercel (Optional)
   deploy-vercel:
     runs-on: ubuntu-latest
     needs: [test-and-build, security-audit]
@@ -130,7 +131,6 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
 
-  # Notify on Success/Failure
   notify:
     runs-on: ubuntu-latest
     needs: [test-and-build, security-audit, deploy-pages, deploy-vercel]
