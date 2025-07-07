@@ -1,18 +1,22 @@
-name: Azure Static Web Apps Deploy
+name: Azure Static Web Apps CI/CD
 
 on:
   push:
     branches:
       - main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+permissions:
+  id-token: write  # enable OIDC token
+  contents: read
 
-      - name: Set up Node.js
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
@@ -26,7 +30,14 @@ jobs:
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "upload"
-          app_location: "."              # Adjust if needed
-          output_location: "build"       # Adjust if needed
+          app_location: "."          # Root of your app
+          output_location: "build"   # Build output directory
+          github_id_token: ${{ steps.auth_token.outputs.token }}
+
+      - name: Get GitHub OIDC token
+        id: auth_token
+        uses: actions/github-script@v6
+        with:
+          script: |
+            return await github.actions.getIDToken()
